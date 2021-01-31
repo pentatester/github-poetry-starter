@@ -5,12 +5,20 @@ GitHub Actions starter for python with [python-poetry](https://github.com/python
 The [complete documentation](https://python-poetry.org/docs/) of python-poetry is available on the [official website](https://python-poetry.org).
 
 - [Github Poetry Starter](#github-poetry-starter)
+  - [Usage](#usage)
   - [Publish to pypi](#publish-to-pypi)
   - [Dependency](#dependency)
     - [Update dependencies](#update-dependencies)
     - [Install dependency](#install-dependency)
     - [Remove dependency](#remove-dependency)
     - [Export requirements.txt](#export-requirementstxt)
+
+## Usage
+
+- [Use this template](https://github.com/upptime/upptime/generate "Use github-poetry-starter as template")
+- [Install poetry](https://python-poetry.org/docs/#installation "Poetry Installation documentation")
+- Run `poetry install --no-root`
+- You Finished, happy coding!
 
 ## Publish to pypi
 
