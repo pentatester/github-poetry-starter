@@ -2,7 +2,7 @@
 name = "github-poetry-starter"
 version = "0.1.0"
 description = ""
-authors = [""]
+authors = ["hexatester <hexatester@protonmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.6"
