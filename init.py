@@ -36,10 +36,11 @@ def remove(path):
 
 parser = argparse.ArgumentParser(description='Setup Poetry Starter.')
 
-parser.add_argument('--name', dest='name', help='Project name')
-parser.add_argument('--description', dest='description', help='Project description')
-parser.add_argument('--author', dest='author', help='Author name / username')
-parser.add_argument('--author-email', dest='email', help='Author-email')
+parser.add_argument('--name', dest='name', help='Project name', required=True)
+parser.add_argument('--version', dest='version', help='Project version', default=VERSION)
+parser.add_argument('--description', dest='description', help='Project description', required=True)
+parser.add_argument('--author', dest='author', help='Author name / username', required=True)
+parser.add_argument('--author-email', dest='email', help='Author-email', required=True)
 
 args = parser.parse_args()
 
