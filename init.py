@@ -72,7 +72,7 @@ if args.module:
     if os.path.isdir(PDIR):
         os.rename(PDIR, NDIR)
     if os.path.isfile(TFILE):
-        os.rename(PDIR, TNFILE)
+        os.rename(TFILE, TNFILE)
     rewrite(TNFILE, [(SNAME, NS_NAME)])
 else:
     remove(PDIR)
