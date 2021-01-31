@@ -1,8 +1,8 @@
 # Github Poetry Starter
 
-GitHub Actions starter for python with [python-poetry](https://github.com/python-poetry/poetry).
+GitHub Actions starter for python with [python-poetry](https://github.com/python-poetry/poetry "Python packaging and dependency management made easy").
 
-The [complete documentation](https://python-poetry.org/docs/) of python-poetry is available on the [official website](https://python-poetry.org).
+The [complete documentation](https://python-poetry.org/docs/ "Poetry documentation") of python-poetry is available on the [official website](https://python-poetry.org "Poetry official website").
 
 - [Github Poetry Starter](#github-poetry-starter)
   - [Usage](#usage)
