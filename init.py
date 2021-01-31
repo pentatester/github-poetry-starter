@@ -10,7 +10,7 @@ BASE_DIR = os.getcwd()
 
 NAME = 'github-poetry-starter'
 SNAME = 'github_poetry_starter'
-VERSION = "0.2.0"
+VERSION = "0.3.0"
 DESCRIPTION = "GitHub Actions starter for python with python-poetry"
 AUTHOR = 'hexatester'
 EMAIL = 'hexatester@protonmail.com'
