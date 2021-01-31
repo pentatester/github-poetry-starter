@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "github-poetry-starter"
 version = "0.1.0"
-description = ""
+description = "GitHub Actions starter for python with python-poetry"
 authors = ["hexatester <hexatester@protonmail.com>"]
 
 [tool.poetry.dependencies]
