@@ -4,6 +4,7 @@
 import argparse
 import os
 import re
+import shutil
 
 BASE_DIR = os.getcwd()
 
@@ -16,11 +17,11 @@ EMAIL = 'hexatester@protonmail.com'
 
 
 def snake_case(text):
-    return tex.lower().replace(' ', '_')
+    return text.lower().replace(' ', '_')
 
 
 def kebab_case(text):
-    return tex.lower().replace(' ', '-')
+    return text.lower().replace(' ', '-')
 
 
 def remove(path):
