@@ -27,7 +27,7 @@ SETUP_KWARGS = [
     'include_package_data',
     'python_requires',
 ]
-INCLUDE = ['pyproject.toml']
+INCLUDE = ['pyproject.toml', 'init.py']
 
 
 def get_requirements():
@@ -50,6 +50,7 @@ def get_setup_kwargs(default=None):
         kwargs = dict(
             long_description=fd.read(),
             install_requires=get_requirements(),
+            include=INCLUDE,
         )
 
     if isinstance(default, dict):
