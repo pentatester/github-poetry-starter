@@ -18,7 +18,7 @@ The [complete documentation](https://python-poetry.org/docs/ "Poetry documentati
 
 ## Usage
 
-- [Use this template](https://github.com/upptime/upptime/generate "Use github-poetry-starter as template")
+- [Use this template](https://github.com/pentatester/github-poetry-starter/generate "Use github-poetry-starter as template")
 - [Install poetry](https://python-poetry.org/docs/#installation "Poetry Installation documentation")
 - Run `poetry install --no-root`
 - Run `python init.py`
