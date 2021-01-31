@@ -15,6 +15,9 @@ DESCRIPTION = "GitHub Actions starter for python with python-poetry"
 AUTHOR = 'hexatester'
 EMAIL = 'hexatester@protonmail.com'
 
+PDIR = os.path.join(BASE_DIR, 'github_poetry_starter')
+TFILE = os.path.join(BASE_DIR, 'tests', 'test_github_poetry_starter.py')
+
 
 def snake_case(text):
     return text.lower().replace(' ', '_')
@@ -43,26 +46,36 @@ parser.add_argument('--description', dest='description', help='Project descripti
 parser.add_argument('--author', dest='author', help='Author name / username', required=True)
 parser.add_argument('--author-email', dest='email', help='Author-email', required=True)
 
+parser.add_argument('--module', dest='module', action='store_true')
+parser.add_argument('--no-module', dest='module', action='store_false')
+parser.set_defaults(module=True)
+
+
 args = parser.parse_args()
 
-NS_NAME = snake_case(args.name)
-PDIR = os.path.join(BASE_DIR, 'github_poetry_starter')
-NDIR = os.path.join(BASE_DIR, NS_NAME)
-TFILE = os.path.join(BASE_DIR, 'tests', 'test_github_poetry_starter.py')
-TNFILE = os.path.join(BASE_DIR, 'tests', f'test_{NS_NAME}.py')
+if args.module:
+    NS_NAME = snake_case(args.name)
+    NDIR = os.path.join(BASE_DIR, NS_NAME)
+    TNFILE = os.path.join(BASE_DIR, 'tests', f'test_{NS_NAME}.py')
 
-if os.path.isdir(PDIR):
-    os.rename(PDIR, NDIR)
+    if os.path.isdir(PDIR):
+        os.rename(PDIR, NDIR)
 
-if os.path.isfile(TFILE):
-    os.rename(PDIR, TNFILE)
+    if os.path.isfile(TFILE):
+        os.rename(PDIR, TNFILE)
 
-with open(TNFILE, 'r+') as f:
-    text = f.read()
-    text = re.sub(SNAME, NS_NAME, text)
-    f.seek(0)
-    f.write(text)
-    f.truncate()
+    with open(TNFILE, 'r+') as f:
+        text = f.read()
+        text = re.sub(SNAME, NS_NAME, text)
+        f.seek(0)
+        f.write(text)
+        f.truncate()
+else:
+    remove(PDIR)
+    remove(TFILE)
+    with open('setup.py', 'w+') as f:
+        f.write("#!/usr/bin/env python\n")
+
 
 with open('pyproject.toml', 'r+') as f:
     text = f.read()
