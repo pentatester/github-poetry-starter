@@ -52,7 +52,7 @@ def get_setup_kwargs(default=None):
             long_description=fd.read(),
             install_requires=get_requirements(),
             include=INCLUDE,
-            packages=find_packages(exclude=exclude),
+            packages=find_packages(exclude=EXCLUDE_PACKAGE),
         )
 
     if isinstance(default, dict):
