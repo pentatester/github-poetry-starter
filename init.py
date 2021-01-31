@@ -80,3 +80,5 @@ with open('setup.py', 'r+') as f:
     f.seek(0)
     f.write(text)
     f.truncate()
+
+print("Please delete init.py file")
