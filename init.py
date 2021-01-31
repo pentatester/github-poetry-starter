@@ -53,7 +53,8 @@ TNFILE = os.path.join(BASE_DIR, 'tests', f'test_{NS_NAME}.py')
 
 if os.path.isdir(PDIR):
     os.rename(PDIR, NDIR)
-elif os.path.isfile(TNFILE):
+
+if os.path.isfile(TFILE):
     os.rename(PDIR, TNFILE)
 
 with open(TNFILE, 'r+') as f:
