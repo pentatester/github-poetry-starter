@@ -3,14 +3,14 @@
 
 import argparse
 import os
-import re
 import shutil
+
 
 BASE_DIR = os.getcwd()
 
 NAME = 'github-poetry-starter'
 SNAME = 'github_poetry_starter'
-VERSION = "0.1.0"
+VERSION = "0.2.0"
 DESCRIPTION = "GitHub Actions starter for python with python-poetry"
 AUTHOR = 'hexatester'
 EMAIL = 'hexatester@protonmail.com'
@@ -38,6 +38,17 @@ def remove(path):
         raise ValueError("file {} is not a file or dir.".format(path))
 
 
+def rewrite(filepath, changes):
+    text = ''
+    with open(filepath) as f:
+        text = f.read()
+
+    for change in changes:
+        text = text.replace(*change)
+
+    with open(filepath, "w") as f:
+        f.write(text)
+
 parser = argparse.ArgumentParser(description='Setup Poetry Starter.')
 
 parser.add_argument('--name', dest='name', help='Project name', required=True)
@@ -60,40 +71,31 @@ if args.module:
 
     if os.path.isdir(PDIR):
         os.rename(PDIR, NDIR)
-
     if os.path.isfile(TFILE):
         os.rename(PDIR, TNFILE)
-
-    with open(TNFILE, 'r+') as f:
-        text = f.read()
-        text = re.sub(SNAME, NS_NAME, text)
-        f.seek(0)
-        f.write(text)
-        f.truncate()
+    rewrite(TNFILE, [(SNAME, NS_NAME)])
 else:
     remove(PDIR)
     remove(TFILE)
     with open('setup.py', 'w+') as f:
         f.write("#!/usr/bin/env python\n")
 
+REPLACE_PYPROJECT = [
+    (NAME, kebab_case(args.name)),
+    (VERSION, args.version),
+    (DESCRIPTION, args.description),
+    (AUTHOR, args.author),
+    (EMAIL, args.email),
+]
 
-with open('pyproject.toml', 'r+') as f:
-    text = f.read()
-    text = re.sub(NAME, kebab_case(args.name), text)
-    text = re.sub(VERSION, args.version, text)
-    text = re.sub(DESCRIPTION, args.description, text)
-    text = re.sub(AUTHOR, args.author, text)
-    text = re.sub(EMAIL, args.email, text)
-    f.seek(0)
-    f.write(text)
-    f.truncate()
+rewrite('pyproject.toml', REPLACE_PYPROJECT)
 
 
-with open('setup.py', 'r+') as f:
-    text = f.read()
-    text = re.sub(", 'init.py'", '', text)
-    f.seek(0)
-    f.write(text)
-    f.truncate()
+REPLACE_SETUP = [
+    (", 'init.py'", '')
+]
+
+rewrite('setup.py', REPLACE_SETUP)
+
 
 print("Please delete init.py file")
