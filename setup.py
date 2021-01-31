@@ -28,6 +28,7 @@ SETUP_KWARGS = [
     'python_requires',
 ]
 INCLUDE = ['pyproject.toml', 'init.py']
+EXCLUDE_PACKAGE = ['tests*']
 
 
 def get_requirements():
@@ -51,6 +52,7 @@ def get_setup_kwargs(default=None):
             long_description=fd.read(),
             install_requires=get_requirements(),
             include=INCLUDE,
+            packages=find_packages(exclude=exclude),
         )
 
     if isinstance(default, dict):
