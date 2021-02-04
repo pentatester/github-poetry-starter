@@ -4,6 +4,7 @@
 import argparse
 import os
 import shutil
+import sys
 
 
 BASE_DIR = os.getcwd()
@@ -49,53 +50,57 @@ def rewrite(filepath, changes):
     with open(filepath, "w") as f:
         f.write(text)
 
-parser = argparse.ArgumentParser(description='Setup Poetry Starter.')
+def main():
+    parser = argparse.ArgumentParser(description='Setup Poetry Starter.')
 
-parser.add_argument('--name', dest='name', help='Project name', required=True)
-parser.add_argument('--version', dest='version', help='Project version', default=VERSION)
-parser.add_argument('--description', dest='description', help='Project description', required=True)
-parser.add_argument('--author', dest='author', help='Author name / username', required=True)
-parser.add_argument('--author-email', dest='email', help='Author-email', required=True)
+    parser.add_argument('--name', dest='name', help='Project name', required=True)
+    parser.add_argument('--version', dest='version', help='Project version', default="0.1.0")
+    parser.add_argument('--description', dest='description', help='Project description', required=True)
+    parser.add_argument('--author', dest='author', help='Author name / username', required=True)
+    parser.add_argument('--author-email', dest='email', help='Author-email', required=True)
 
-parser.add_argument('--module', dest='module', action='store_true')
-parser.add_argument('--no-module', dest='module', action='store_false')
-parser.set_defaults(module=True)
-
-
-args = parser.parse_args()
-
-if args.module:
-    NS_NAME = snake_case(args.name)
-    NDIR = os.path.join(BASE_DIR, NS_NAME)
-    TNFILE = os.path.join(BASE_DIR, 'tests', f'test_{NS_NAME}.py')
-
-    if os.path.isdir(PDIR):
-        os.rename(PDIR, NDIR)
-    if os.path.isfile(TFILE):
-        os.rename(TFILE, TNFILE)
-    rewrite(TNFILE, [(SNAME, NS_NAME)])
-else:
-    remove(PDIR)
-    remove(TFILE)
-    with open('setup.py', 'w+') as f:
-        f.write("#!/usr/bin/env python\n")
-
-REPLACE_PYPROJECT = [
-    (NAME, kebab_case(args.name)),
-    (VERSION, args.version),
-    (DESCRIPTION, args.description),
-    (AUTHOR, args.author),
-    (EMAIL, args.email),
-]
-
-rewrite('pyproject.toml', REPLACE_PYPROJECT)
+    parser.add_argument('--module', dest='module', action='store_true')
+    parser.add_argument('--no-module', dest='module', action='store_false')
+    parser.set_defaults(module=True)
 
 
-REPLACE_SETUP = [
-    (", 'init.py'", '')
-]
+    args = parser.parse_args()
 
-rewrite('setup.py', REPLACE_SETUP)
+    if args.module:
+        NS_NAME = snake_case(args.name)
+        NDIR = os.path.join(BASE_DIR, NS_NAME)
+        TNFILE = os.path.join(BASE_DIR, 'tests', f'test_{NS_NAME}.py')
+
+        if os.path.isdir(PDIR):
+            os.rename(PDIR, NDIR)
+        if os.path.isfile(TFILE):
+            os.rename(TFILE, TNFILE)
+        rewrite(TNFILE, [(SNAME, NS_NAME)])
+    else:
+        remove(PDIR)
+        remove(TFILE)
+        with open('setup.py', 'w+') as f:
+            f.write("#!/usr/bin/env python\n")
+
+    REPLACE_PYPROJECT = [
+        (NAME, kebab_case(args.name)),
+        (VERSION, args.version),
+        (DESCRIPTION, args.description),
+        (AUTHOR, args.author),
+        (EMAIL, args.email),
+    ]
+
+    rewrite('pyproject.toml', REPLACE_PYPROJECT)
 
 
-print("Please delete init.py file")
+    REPLACE_SETUP = [
+        (", 'init.py'", '')
+    ]
+
+    rewrite('setup.py', REPLACE_SETUP)
+
+
+    print("Please delete init.py file")
+
+if __name__ == "__main__":
+    sys.exit(main())
